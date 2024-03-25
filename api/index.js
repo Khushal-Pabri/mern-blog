@@ -36,6 +36,10 @@ app.use(cookieParser())
 //express.static(__dirname + '/uploads') is specifying the directory from which to serve the static files. __dirname is a Node.js variable that represents the current directory of the module. So, it's serving static files from the "uploads" directory located in the same directory as the current module.
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
+app.get('/', (req, res) => {
+    res.json("hello");
+});
+
 app.post('/register', async (req, res) => {
     try{
         let data = new User(req.body);
