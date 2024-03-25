@@ -18,6 +18,7 @@ const uploadMiddleware = multer({ dest: 'uploads/' })
 
 //file system
 const fs = require('fs');
+const { uploadOnCloudinary } = require('./utils/cloudinary');
 
 //config
 require('./configs/config');
@@ -122,6 +123,10 @@ app.post('/send-post', uploadMiddleware.single('file') ,async (req, res) => {
     const newPath = path+'.'+ext;
     fs.renameSync(path, newPath);
 
+    const uploadResult = await uploadOnCloudinary(newPath);
+    console.log(uploadResult);
+    fs.unlinkSync(newPath);
+
     const {title, summary, content} = req.body;
     // res.json({title, summary, content});
 
@@ -134,7 +139,7 @@ app.post('/send-post', uploadMiddleware.single('file') ,async (req, res) => {
             title,
             summary,
             content,
-            cover: newPath,
+            cover: uploadResult.url,
             author: id
         });
         
@@ -166,6 +171,7 @@ app.get('/post/:id', async(req, res) =>
 //update post
 app.put('/edit-post/:id', uploadMiddleware.single('file'), async(req, res) =>{
     let newPath = null;
+    let uploadResult = null;
     const postid = req.body.postid;
     if(req.file)
     {
@@ -174,6 +180,10 @@ app.put('/edit-post/:id', uploadMiddleware.single('file'), async(req, res) =>{
         const ext = parts[parts.length - 1];//getting extinsion name by -1 index
         newPath = path+'.'+ext;
         fs.renameSync(path, newPath);
+
+        uploadResult = await uploadOnCloudinary(newPath);
+        console.log(uploadResult);
+        fs.unlinkSync(newPath);
     }
 
     const {token} = req.cookies;
@@ -199,7 +209,7 @@ app.put('/edit-post/:id', uploadMiddleware.single('file'), async(req, res) =>{
                 title: req.body.title,
                 summary: req.body.summary,
                 content: req.body.content,
-                cover: newPath?newPath:postDoc.cover
+                cover: newPath? uploadResult.url:postDoc.cover
             }
         )
 

@@ -6,7 +6,7 @@ export default function Post(props)
         <main>
             <div className="post">
                 <div className = "image">
-                <Link to={`/post/${props.id}`}><img src={'http://localhost:4400/'+props.cover}></img></Link>
+                <Link to={`/post/${props.id}`}><img src={props.cover}></img></Link>
                 </div>
                 <div className="texts">
                     <Link to={`/post/${props.id}`}><h2>{props.title}</h2></Link>

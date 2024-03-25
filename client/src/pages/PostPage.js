@@ -56,7 +56,7 @@ export default function PostPage()
             )}
             {/* <time>{format(new Date(postInfo.updatedAt), 'MMM d, yyyy HH:mm')}</time> */}
             <div className="image">
-                <img src={`http://localhost:4400/${postInfo.cover}`}></img>
+                <img src={postInfo.cover}></img>
             </div>
             <div dangerouslySetInnerHTML={{__html:postInfo.content}}></div>
         </div>
