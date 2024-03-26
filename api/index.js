@@ -28,7 +28,10 @@ const port = process.env.PORT || 4400;
 const User = require('./models/User');
 const Post = require('./models/Post');
 
-app.use(cors({credentials:true, origin:'https://mern-blog-frontend-kohl-five.vercel.app/'}))//for credential we have to set this to true
+app.use(cors({
+    credentials: true,
+    origin: ["https://mern-blog-frontend-kohl-five.vercel.app"]
+  }));//for credential we have to set this to true
 app.use(bodyParser.json())
 app.use(cookieParser())
 
