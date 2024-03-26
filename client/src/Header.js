@@ -7,7 +7,7 @@ export default function Header()
   const [redirect, setRedirect] = useState(false);
   async function fetchData()
   {
-    const response = await fetch('http://localhost:4400/profile', {
+    const response = await fetch('https://mern-blog-backend-8x0q.onrender.com/profile', {
       //method: 'GET',
       credentials: 'include'//to save cookies
     })
@@ -20,7 +20,7 @@ export default function Header()
   }, []);
 
   async function logout(){
-    const response = await fetch('http://localhost:4400/logout', {
+    const response = await fetch('https://mern-blog-backend-8x0q.onrender.com/logout', {
       method: 'POST',
       credentials: 'include'
     })

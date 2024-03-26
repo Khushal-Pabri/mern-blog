@@ -13,7 +13,7 @@ export default function EditPost()
     const [redirect, setRedirect] = useState(false);
 
     useEffect(()=>{
-        fetch('http://localhost:4400/post/'+id, {
+        fetch('https://mern-blog-backend-8x0q.onrender.com/post/'+id, {
             method: 'GET'
         }).then(response => {
             response.json().then(postInfo =>{
@@ -40,7 +40,7 @@ export default function EditPost()
 
         e.preventDefault();
 
-        const response = await fetch(`http://localhost:4400/edit-post/${id}`, {
+        const response = await fetch(`https://mern-blog-backend-8x0q.onrender.com/edit-post/${id}`, {
             method: 'PUT',
             body: data,
             credentials:'include'

@@ -22,12 +22,13 @@ const { uploadOnCloudinary } = require('./utils/cloudinary');
 
 //config
 require('./configs/config');
+const port = process.env.PORT || 4400;
 
 //schemas
 const User = require('./models/User');
 const Post = require('./models/Post');
 
-app.use(cors({credentials:true, origin:'http://localhost:3000'}))//for credential we have to set this to true
+app.use(cors({credentials:true, origin:'https://mern-blog-frontend-kohl-five.vercel.app/'}))//for credential we have to set this to true
 app.use(bodyParser.json())
 app.use(cookieParser())
 
@@ -222,4 +223,6 @@ app.put('/edit-post/:id', uploadMiddleware.single('file'), async(req, res) =>{
 
 });
 
-app.listen(4400);
+app.listen(port, () => {
+    console.log(`app listening on port ${port}`)
+})

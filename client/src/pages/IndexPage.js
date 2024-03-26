@@ -5,7 +5,7 @@ export default function IndexPage()
     const [posts, setPosts] = useState([]);
     async function getAllPosts()
     {
-        const response = await fetch("http://localhost:4400/get-posts", {
+        const response = await fetch("https://mern-blog-backend-8x0q.onrender.com/get-posts", {
             method: 'GET',
         })
 
