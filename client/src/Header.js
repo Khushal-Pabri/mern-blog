@@ -3,17 +3,13 @@ import {useContext ,useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 export default function Header()
 {
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_APIURL;
 
   const {setUserInfo, userInfo, isLoggedIn, logout, resetCategory, setPage} = useContext(UserContext);
   const [redirect, setRedirect] = useState(false);
   async function fetchData()
   {
-<<<<<<< HEAD
-    const response = await fetch('https://mern-blog-backend-8x0q.onrender.com/profile', {
-=======
     const response = await fetch(`${apiUrl}/profile`, {
->>>>>>> blogv2
       //method: 'GET',
       credentials: 'include'//to save cookies
     })

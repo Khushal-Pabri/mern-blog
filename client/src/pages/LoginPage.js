@@ -3,7 +3,7 @@ import {Navigate} from 'react-router-dom'
 import { UserContext } from "../UserContext";
 export default function LoginPage()
 {
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = process.env.REACT_APP_APIURL;
 
     const {setUserInfo, userInfo} = useContext(UserContext);
     const [username, setUsername] = useState('');
@@ -19,11 +19,7 @@ export default function LoginPage()
     async function handleLogin(e)
     {
         e.preventDefault();
-<<<<<<< HEAD
-        const response = await fetch('https://mern-blog-backend-8x0q.onrender.com/login', {
-=======
         const response = await fetch(`${apiUrl}/login`, {
->>>>>>> blogv2
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password}),

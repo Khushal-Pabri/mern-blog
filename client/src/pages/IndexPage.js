@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { UserContext } from "../UserContext";
 export default function IndexPage()
 {
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = process.env.REACT_APP_APIURL;
 
     const [posts, setPosts] = useState([]);
     const [pageCount, setPageCount] = useState(0);

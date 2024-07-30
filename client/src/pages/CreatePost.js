@@ -4,7 +4,7 @@ import {Navigate} from 'react-router-dom'
 
 export default function CreatePost()
 {
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = process.env.REACT_APP_APIURL;
 
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
@@ -26,11 +26,7 @@ export default function CreatePost()
 
         console.log(files);
 
-<<<<<<< HEAD
-        const response = await fetch("https://mern-blog-backend-8x0q.onrender.com/send-post", {
-=======
         const response = await fetch(`${apiUrl}/send-post`, {
->>>>>>> blogv2
             method: 'POST',
             body: data,
             credentials: 'include'//sending cookie so that we can get the username

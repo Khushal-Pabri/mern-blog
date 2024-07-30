@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import { format } from 'date-fns';
 
 export default function ProfilePage() {
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = process.env.REACT_APP_APIURL;
 
     const {userInfo} = useContext(UserContext);
     const [posts, setPosts] = useState([]);
