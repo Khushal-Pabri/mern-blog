@@ -20,7 +20,12 @@ exports.login = async (req, res) => {
         const user = await User.findOne({ username: req.body.username });
         if (user && await bcrypt.compare(req.body.password, user.password)) {
             const token = jwt.sign({ id: user._id, username: user.username }, secret);
-            res.cookie('token', token).json({ id: user._id, username: user.username });
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,// Only send over HTTPS
+                sameSite: 'None',// Allow cookies to be sent cross-origin
+                domain: '.vercel.app'
+            }).json({ id: user._id, username: user.username });
         } else {
             res.status(400).json('Wrong username or password');
         }
@@ -47,5 +52,10 @@ exports.profile = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-    res.cookie('token', '').json('Logged out');
+    res.cookie('token', '', {
+        httpOnly: true,
+        secure: true,// Only over HTTPS
+        sameSite: 'None',// Allow cookies to be sent cross-origin
+        domain: '.vercel.app'
+    }).json('Logged out');
 };
