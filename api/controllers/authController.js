@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
                 httpOnly: true,
                 secure: true,// Only send over HTTPS
                 sameSite: 'None',// Allow cookies to be sent cross-origin
-                domain: '.vercel.app'
+                domain: 'mern-blog-frontend-fq1j1yhqa-khushal-pabris-projects.vercel.app'
             }).json({ id: user._id, username: user.username });
         } else {
             res.status(400).json('Wrong username or password');
@@ -56,6 +56,6 @@ exports.logout = (req, res) => {
         httpOnly: true,
         secure: true,// Only over HTTPS
         sameSite: 'None',// Allow cookies to be sent cross-origin
-        domain: '.vercel.app'
+        domain: 'mern-blog-frontend-fq1j1yhqa-khushal-pabris-projects.vercel.app'
     }).json('Logged out');
 };
