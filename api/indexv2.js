@@ -12,7 +12,7 @@ const NODE_ENV = process.env.NODE_ENV;
 const app = express();
 require('./configs/config');
 
-app.use(cors({ credentials: true, origin: NODE_ENV === 'production' ? 'https://mern-blog-frontend-kohl-five.vercel.app' : 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: NODE_ENV === 'production' ? 'https://mern-blog-frontend-fq1j1yhqa-khushal-pabris-projects.vercel.app' : 'http://localhost:3000' }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 // app.use('/uploads', express.static(__dirname + '/uploads'));
