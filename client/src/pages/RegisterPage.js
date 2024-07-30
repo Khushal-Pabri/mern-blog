@@ -1,9 +1,11 @@
 import { useState } from "react";
+import {Navigate} from 'react-router-dom'
 
 export default function RegisterPage()
 {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
     function handleReload(e)
     {
@@ -19,12 +21,7 @@ export default function RegisterPage()
             body: JSON.stringify({username, password})
         })
         console.log(response);
-        // const data = await response.json();//in react fetch dosent bring data directly we have to process it like this. text is for text only if we send json from server we have to use .json()
-        // console.log(data);
-        // if(data.code === 11000)
-        // {
-        //     console.log("username already exist");
-        // }
+
         if(response.status !== 200)
         {
             alert('Registration failed');
@@ -32,10 +29,15 @@ export default function RegisterPage()
         else
         {
             console.log('Registration successfull')
+            setRedirect(true);
         }
-
-
     }
+
+    if(redirect)
+    {
+        return <Navigate to={`/login`} />
+    }
+
     return(
         <form className="register" onSubmit={handleReload}>
             <h1>Register</h1>
