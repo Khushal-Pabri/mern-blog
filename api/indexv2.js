@@ -4,22 +4,26 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
+require('dotenv').config();
+
+const PORT = process.env.PORT || 4400;
+const NODE_ENV = process.env.NODE_ENV;
 
 const app = express();
 require('./configs/config');
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: NODE_ENV === 'production' ? 'https://mern-blog-frontend-kohl-five.vercel.app/' : 'http://localhost:3000' }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use('/uploads', express.static(__dirname + '/uploads'));
+// app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(authRoutes);
 app.use(postRoutes);
 
-app.get('/', (req, res) => {
-    res.json("hello");
+app.get('/keep-alive', (req, res) => {
+    res.json("hello world");
 });
 
-app.listen(4400, () => {
-    console.log('Server is running on port 4400');
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

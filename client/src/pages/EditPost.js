@@ -5,6 +5,8 @@ import Editor from '../Editor';
 
 export default function EditPost()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    
     const {id} = useParams();
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
@@ -14,7 +16,7 @@ export default function EditPost()
     const [redirect, setRedirect] = useState(false);
 
     useEffect(()=>{
-        fetch('http://localhost:4400/post/'+id, {
+        fetch(`${apiUrl}/post/${id}`, {
             method: 'GET'
         }).then(response => {
             response.json().then(postInfo =>{
@@ -43,7 +45,7 @@ export default function EditPost()
 
         e.preventDefault();
 
-        const response = await fetch(`http://localhost:4400/edit-post/${id}`, {
+        const response = await fetch(`${apiUrl}/edit-post/${id}`, {
             method: 'PUT',
             body: data,
             credentials:'include'

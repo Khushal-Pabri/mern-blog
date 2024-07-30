@@ -4,6 +4,8 @@ import {Navigate} from 'react-router-dom'
 
 export default function CreatePost()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
@@ -24,7 +26,7 @@ export default function CreatePost()
 
         console.log(files);
 
-        const response = await fetch("http://localhost:4400/send-post", {
+        const response = await fetch(`${apiUrl}/send-post`, {
             method: 'POST',
             body: data,
             credentials: 'include'//sending cookie so that we can get the username

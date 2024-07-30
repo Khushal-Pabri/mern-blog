@@ -6,12 +6,14 @@ import {Link} from 'react-router-dom';
 
 export default function PostPage()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const {id} = useParams();
     const [postInfo, setPostInfo] = useState({});
     const {userInfo} = useContext(UserContext);
     async function getPost()
     {
-        const response = await fetch(`http://localhost:4400/post/${id}`, {
+        const response = await fetch(`${apiUrl}/post/${id}`, {
             method: 'GET'
         })
         let data = await response.json();

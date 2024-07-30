@@ -4,6 +4,8 @@ import ReactPaginate from 'react-paginate';
 import { UserContext } from "../UserContext";
 export default function IndexPage()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const [posts, setPosts] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     // const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +14,7 @@ export default function IndexPage()
 
     const fetchPosts = async (page) =>
     {
-        const response = await fetch(`http://localhost:4400/get-posts?page=${page}&limit=${limit}&category=${category}`);
+        const response = await fetch(`${apiUrl}/get-posts?page=${page}&limit=${limit}&category=${category}`);
 
         const data = await response.json();
         setPosts(data.posts);

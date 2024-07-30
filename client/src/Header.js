@@ -3,11 +3,13 @@ import {useContext ,useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 export default function Header()
 {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const {setUserInfo, userInfo, isLoggedIn, logout, resetCategory, setPage} = useContext(UserContext);
   const [redirect, setRedirect] = useState(false);
   async function fetchData()
   {
-    const response = await fetch('http://localhost:4400/profile', {
+    const response = await fetch(`${apiUrl}/profile`, {
       //method: 'GET',
       credentials: 'include'//to save cookies
     })
@@ -25,7 +27,7 @@ export default function Header()
 
   async function handleLogout(){
     console.log('invoked logout');
-    const response = await fetch('http://localhost:4400/logout', {
+    const response = await fetch(`${apiUrl}/logout`, {
       method: 'POST',
       credentials: 'include'
     })

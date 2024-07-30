@@ -5,6 +5,8 @@ import ReactPaginate from 'react-paginate';
 import { format } from 'date-fns';
 
 export default function ProfilePage() {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const {userInfo} = useContext(UserContext);
     const [posts, setPosts] = useState([]);
     const [totalPosts, setTotalPosts] = useState(0);
@@ -19,7 +21,7 @@ export default function ProfilePage() {
     async function fetchUserPosts() {
         console.log("fetching profile posts")
         const userId = userInfo._id;
-        const postsResponse = await fetch(`http://localhost:4400/get-posts?page=${currentPage}&limit=${limit}&userId=${userId}`);
+        const postsResponse = await fetch(`${apiUrl}/get-posts?page=${currentPage}&limit=${limit}&userId=${userId}`);
         const postsData = await postsResponse.json();
         setPosts(postsData.posts);
         setTotalPosts(postsData.total);
