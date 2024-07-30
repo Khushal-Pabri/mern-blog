@@ -3,6 +3,8 @@ import {Navigate} from 'react-router-dom'
 
 export default function RegisterPage()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -15,7 +17,11 @@ export default function RegisterPage()
     async function register(e)
     {
         e.preventDefault();
+<<<<<<< HEAD
         const response = await fetch('https://mern-blog-backend-8x0q.onrender.com/register', {
+=======
+        const response = await fetch(`${apiUrl}/register`, {
+>>>>>>> blogv2
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password})

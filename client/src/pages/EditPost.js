@@ -5,6 +5,8 @@ import Editor from '../Editor';
 
 export default function EditPost()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    
     const {id} = useParams();
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
@@ -14,7 +16,11 @@ export default function EditPost()
     const [redirect, setRedirect] = useState(false);
 
     useEffect(()=>{
+<<<<<<< HEAD
         fetch('https://mern-blog-backend-8x0q.onrender.com/post/'+id, {
+=======
+        fetch(`${apiUrl}/post/${id}`, {
+>>>>>>> blogv2
             method: 'GET'
         }).then(response => {
             response.json().then(postInfo =>{
@@ -43,7 +49,11 @@ export default function EditPost()
 
         e.preventDefault();
 
+<<<<<<< HEAD
         const response = await fetch(`https://mern-blog-backend-8x0q.onrender.com/edit-post/${id}`, {
+=======
+        const response = await fetch(`${apiUrl}/edit-post/${id}`, {
+>>>>>>> blogv2
             method: 'PUT',
             body: data,
             credentials:'include'

@@ -6,12 +6,18 @@ import {Link} from 'react-router-dom';
 
 export default function PostPage()
 {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const {id} = useParams();
     const [postInfo, setPostInfo] = useState({});
     const {userInfo} = useContext(UserContext);
     async function getPost()
     {
+<<<<<<< HEAD
         const response = await fetch(`https://mern-blog-backend-8x0q.onrender.com/post/${id}`, {
+=======
+        const response = await fetch(`${apiUrl}/post/${id}`, {
+>>>>>>> blogv2
             method: 'GET'
         })
         let data = await response.json();
