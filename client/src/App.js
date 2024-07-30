@@ -10,6 +10,7 @@ import { UserContextProvider } from './UserContext';
 import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage';
 import EditPost from './pages/EditPost';
+import ProfilePage from './pages/ProfilePage';
 //The <main> tag specifies the main content of a document. The content inside the <main> element should be unique to the document. It should not contain any content that is repeated across documents such as sidebars, navigation links, copyright information, site logos, and search forms.
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path={'/create-post'} element ={<CreatePost />} />
           <Route path={'/post/:id'} element ={<PostPage />} />
           <Route path={'/edit-post/:id'} element ={<EditPost />} />
+          <Route path={'/my-profile'} element ={<ProfilePage />} />
         </Route>
       </Routes>
     </UserContextProvider>

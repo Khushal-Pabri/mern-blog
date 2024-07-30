@@ -10,6 +10,7 @@ export default function EditPost()
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
     const [files, setFiles] = useState('');
+    const [category, setCategory] = useState('');
     const [redirect, setRedirect] = useState(false);
 
     useEffect(()=>{
@@ -21,6 +22,7 @@ export default function EditPost()
                 setSummary(postInfo.summary);
                 setContent(postInfo.content);
                 setFiles(postInfo.file);
+                setCategory(postInfo.category);
                 console.log(postInfo);
             })
         })
@@ -33,6 +35,7 @@ export default function EditPost()
         data.set('summary', summary);
         data.set('content', content);
         data.set('postid', id);
+        data.set('category', category);
         if(files?.[0])
         {
             data.set('file', files?.[0]);//?. is the optional chaining operator, which means if files is null or undefined, the expression will short-circuit, and the result will be undefined.
@@ -72,6 +75,23 @@ export default function EditPost()
 
             <input type = 'file'
             onChange={(e) => setFiles(e.target.files)}/>
+
+        <div className="select-container">
+            <select 
+                value={category} 
+                onChange={(e) => setCategory(e.target.value)}
+                className="custom-select"
+            >
+                <option value="" disabled selected>Select Category</option>
+                <option value="Technology">Technology</option>
+                <option value="Health">Health</option>
+                <option value="Business">Business</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Sports">Sports</option>
+                <option value="Science">Science</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
             <Editor onChange={setContent} value = {content} />
 

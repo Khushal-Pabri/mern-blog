@@ -16,12 +16,6 @@ export default function PostPage()
         })
         let data = await response.json();
         setPostInfo(data);
-        //: Using the callback function form of setPostInfo: as it was not setting
-        // setPostInfo((prevPostInfo) => {
-        //     console.log(prevPostInfo); // Previous state
-        //     return data; // New state
-        // });
-        // //console.log(postInfo);
     }
     useEffect(()=>{
         console.log(id);
@@ -43,7 +37,7 @@ export default function PostPage()
                     <time>Updated At: {format(new Date(postInfo.updatedAt), 'MMM d, yyyy HH:mm')}</time>
                 )}
             </div>
-            {postInfo && postInfo.author && userInfo && userInfo.id === postInfo.author._id &&(
+            {postInfo && postInfo.author && userInfo && userInfo._id === postInfo.author._id &&(
                 <div className="edit-row">
                     {userInfo.name}
                     <Link className="edit-button" to={`/edit-post/${postInfo._id}`}>

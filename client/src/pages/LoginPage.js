@@ -6,6 +6,7 @@ export default function LoginPage()
     const {setUserInfo, userInfo} = useContext(UserContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { login } = useContext(UserContext);
     const [redirect, setRedirect] = useState(false);
 
     function handleReload(e)
@@ -13,7 +14,7 @@ export default function LoginPage()
         e.preventDefault();
     }
 
-    async function login(e)
+    async function handleLogin(e)
     {
         e.preventDefault();
         const response = await fetch('http://localhost:4400/login', {
@@ -33,7 +34,7 @@ export default function LoginPage()
         {
             console.log('login successfull')
             const data = await response.json();
-            setUserInfo(data);
+            login(data);
             setRedirect(true);
         }
     }
@@ -54,7 +55,7 @@ export default function LoginPage()
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}/>
-            <button type="submit" onClick={login}>Login</button>
+            <button type="submit" onClick={handleLogin}>Login</button>
         </form>
     );
 }

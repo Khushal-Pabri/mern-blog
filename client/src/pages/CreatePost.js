@@ -8,6 +8,7 @@ export default function CreatePost()
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
     const [files, setFiles] = useState('');
+    const [category, setCategory] = useState('');
     const [redirect, setRedirect] = useState(false);
 
     async function createPost(e)
@@ -17,6 +18,7 @@ export default function CreatePost()
         data.set('summary', summary);
         data.set('content', content);
         data.set('file', files[0]);
+        data.set('category', category);
 
         e.preventDefault();
 
@@ -41,6 +43,8 @@ export default function CreatePost()
         return <Navigate to={'/'} />
     }
 
+    const isFormValid = title && summary && content && files && category;
+
     return(
         <form onSubmit={createPost}>
             <input type = 'title' 
@@ -56,9 +60,26 @@ export default function CreatePost()
             <input type = 'file'
             onChange={(e) => setFiles(e.target.files)}/>
 
+        <div className="select-container">
+            <select 
+                value={category} 
+                onChange={(e) => setCategory(e.target.value)}
+                className="custom-select"
+            >
+                <option value="" disabled selected>Select Category</option>
+                <option value="Technology">Technology</option>
+                <option value="Health">Health</option>
+                <option value="Business">Business</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Sports">Sports</option>
+                <option value="Science">Science</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
             <Editor onChange={setContent} value = {content} />
 
-            <button style={{marginTop:'10px'}}>Post</button>
+            <button style={{marginTop:'10px'}}  disabled={!isFormValid} >Post</button>
         </form>
     );
 }

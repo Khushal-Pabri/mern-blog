@@ -3,7 +3,7 @@ import {useContext ,useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 export default function Header()
 {
-  const {setUserInfo, userInfo} = useContext(UserContext);
+  const {setUserInfo, userInfo, isLoggedIn, logout, resetCategory, setPage} = useContext(UserContext);
   const [redirect, setRedirect] = useState(false);
   async function fetchData()
   {
@@ -12,34 +12,44 @@ export default function Header()
       credentials: 'include'//to save cookies
     })
     const data = await response.json();
+    console.log(data);
     setUserInfo(data);
   }
 
   useEffect(() => {
+    // if (isLoggedIn) {
+    //     fetchData();
+    // }
     fetchData();
-  }, []);
+}, [isLoggedIn]);
 
-  async function logout(){
+  async function handleLogout(){
+    console.log('invoked logout');
     const response = await fetch('http://localhost:4400/logout', {
       method: 'POST',
       credentials: 'include'
     })
-    const data = await response.json();
-    console.log(response);
-    setUserInfo(null);
+    // const data = await response.json();
+    // console.log(response);
+    logout();
   }
+
+  const handleLogoClick = () => {
+    resetCategory();
+    setPage(1);
+  };
 
   const username = userInfo?.username;
 
   return(
     <header>
-      <Link to="/" className="logo">MyBlog</Link>
+      <Link to="/" className="logo" onClick={handleLogoClick}>BlogNest</Link>
       <nav>
       {username ? (
         <>
           <Link to="/my-profile">Profile</Link>
           <Link to="/create-post">Cerate New Post</Link>
-          <Link to="/" onClick={logout}>Logout</Link>
+          <Link to="/" onClick={handleLogout}>Logout</Link>
         </>
       ) : (
         <>

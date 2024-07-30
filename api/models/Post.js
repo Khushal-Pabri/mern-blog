@@ -5,7 +5,8 @@ const postSchema = new mongoose.Schema(
     summary:{type:String, required:true},
     content:{type:String, required:true},
     cover:{type:String, required:true},
-    author:{type:mongoose.Schema.Types.ObjectId, ref:'users' ,required:true}
+    author:{type:mongoose.Schema.Types.ObjectId, ref:'users' ,required:true},
+    category: { type: String, required: true }
 }, 
 {
     timestamps: true
