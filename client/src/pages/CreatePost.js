@@ -24,7 +24,7 @@ export default function CreatePost()
 
         console.log(files);
 
-        const response = await fetch("http://localhost:4400/send-post", {
+        const response = await fetch("https://mern-blog-backend-8x0q.onrender.com/send-post", {
             method: 'POST',
             body: data,
             credentials: 'include'//sending cookie so that we can get the username
